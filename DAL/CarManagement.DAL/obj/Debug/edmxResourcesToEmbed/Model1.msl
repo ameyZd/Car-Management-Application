@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CarManagementModelStoreContainer" CdmEntityContainer="CarManagementEntities">
+    <EntitySetMapping Name="AvailablePremiumCars">
+      <EntityTypeMapping TypeName="CarManagementModel.AvailablePremiumCar">
+        <MappingFragment StoreEntitySet="AvailablePremiumCars">
+          <ScalarProperty Name="PremiumCarID" ColumnName="PremiumCarID" />
+          <ScalarProperty Name="PremiumCars" ColumnName="PremiumCars" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarsDatas">
+      <EntityTypeMapping TypeName="CarManagementModel.CarsData">
+        <MappingFragment StoreEntitySet="CarsData">
+          <ScalarProperty Name="CarID" ColumnName="CarID" />
+          <ScalarProperty Name="CarName" ColumnName="CarName" />
+          <ScalarProperty Name="CarMileage" ColumnName="CarMileage" />
+          <ScalarProperty Name="CarOwnerName" ColumnName="CarOwnerName" />
+          <ScalarProperty Name="CarOwnerEmail" ColumnName="CarOwnerEmail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PremiumCarsDatas">
+      <EntityTypeMapping TypeName="CarManagementModel.PremiumCarsData">
+        <MappingFragment StoreEntitySet="PremiumCarsData">
+          <ScalarProperty Name="CarOwnerID" ColumnName="CarOwnerID" />
+          <ScalarProperty Name="CarOwnerName" ColumnName="CarOwnerName" />
+          <ScalarProperty Name="CarOwnerEmail" ColumnName="CarOwnerEmail" />
+          <ScalarProperty Name="SelectedCar" ColumnName="SelectedCar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="CarManagementModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PremiumCarsRepositories">
+      <EntityTypeMapping TypeName="CarManagementModel.PremiumCarsRepository">
+        <MappingFragment StoreEntitySet="PremiumCarsRepository">
+          <ScalarProperty Name="PremiumCars" ColumnName="PremiumCars" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="RefreshAvailablePremiumCars" FunctionName="CarManagementModel.Store.RefreshAvailablePremiumCars" />
+    <FunctionImportMapping FunctionImportName="sp_TruncateCarEntries" FunctionName="CarManagementModel.Store.sp_TruncateCarEntries" />
+    <FunctionImportMapping FunctionImportName="sp_updateCar" FunctionName="CarManagementModel.Store.sp_updateCar" />
+  </EntityContainerMapping>
+</Mapping>

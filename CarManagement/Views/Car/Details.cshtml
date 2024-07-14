@@ -1,0 +1,39 @@
+﻿@model ViewModels.CarsDataViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<h2 class="text-center">Details</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Car Details</h4>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong><i class="fa fa-id-badge"></i> Car ID:</strong> @Html.DisplayFor(model => model.CarID)</p>
+                            <p><strong><i class="fa fa-car"></i> Car Name:</strong> @Html.DisplayFor(model => model.CarName)</p>
+                            <p><strong><i class="fa fa-tachometer"></i> Car Mileage:</strong> @Html.DisplayFor(model => model.CarMileage)</p>
+                            <p><strong><i class="fa fa-user"></i> Owner Name:</strong> @Html.DisplayFor(model => model.CarOwnerName)</p>
+                            <p><strong><i class="fa fa-envelope"></i> Owner Email:</strong> @Html.DisplayFor(model => model.CarOwnerEmail)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3 text-center">
+    <a href="@Url.Action("Edit", new { carId = Model.CarID })" class="btn btn-primary">
+        <i class="fa fa-edit"></i> Edit
+    </a>
+    <a href="@Url.Action("Index", new { carId = Model.CarID })" class="btn btn-secondary ml-2">
+        <i class="fa fa-backward" aria-hidden="true"></i> Back to list
+    </a>
+</div>

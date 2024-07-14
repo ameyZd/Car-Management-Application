@@ -1,0 +1,95 @@
+﻿@model IEnumerable<ViewModels.CarsDataViewModel>
+@using System.Web.Helpers
+
+@{
+    ViewBag.Title = "Car Information Page";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<h2 class="text-center">Car Information Page</h2>
+
+@*<center>
+    <a href="https://amey-car-management-search.anvil.app/" target="_blank" class="btn btn-outline-light btn-dark btn-gold-hover">
+        AI Car Search trends <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+    </a>
+</center>*@
+<br />
+<p class="text-center">
+    <a href="@Url.Action("Create", "Car")" class="btn btn-primary">
+        Create New <i class="fa fa-car" aria-hidden="true"></i>
+    </a>
+
+    <a href="@Url.Action("DeleteAll")" class="btn btn-danger delete-all-btn" style="color: white;">
+        <i class="fa fa-trash" aria-hidden="true"></i> Delete All Entries
+    </a>
+
+    <a href="@Url.Action("Index", "Car")" class="btn btn-info" style="color: white;">
+        <i class="fa fa-refresh fa-spin" style="font-size:24px"></i> Click to see updated entries
+    </a>
+
+    <a href="@Url.Action("DownloadCSV", "Car")" class="btn btn-primary" style="color: white;">
+        <i class="fa fa-download"></i> Download all entries
+    </a>
+</p>
+<br />
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="table-responsive">
+                @{
+                    var grid = new WebGrid(Model, canPage: true, canSort: true, rowsPerPage: 10);
+                }
+
+                @grid.GetHtml(
+                    tableStyle: "table table-bordered table-striped table-hover",
+                    headerStyle: "thead-dark",
+                    columns: grid.Columns(
+                        grid.Column("CarID", "CarID"),
+                        grid.Column("CarName", "Car Model"),
+                        grid.Column("CarMileage", "Car Mileage"),
+                        grid.Column("CarOwnerName", "Car Owner Name"),
+                        grid.Column("CarOwnerEmail", "Car Owner Email"),
+                        grid.Column(
+                            header: "Actions",
+                            format: @<text>
+                                    <div class="btn-group">
+                                        <a href="@Url.Action("Edit", new { carId = item.CarID })" class="btn btn-primary" style="color: white;">
+                                            <i class="fa fa-edit"></i> Edit
+                                        </a>
+                                        <a href="@Url.Action("Details", new { carId = item.CarID })" class="btn btn-success" style="color: white;">
+                                            <i class="fa fa-file-text" aria-hidden="true"></i> Details
+                                        </a>
+                                        <a href="@Url.Action("Delete", new { carId = item.CarID })" class="btn btn-danger delete-btn" style="color: white;">
+                                            <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                                        </a>
+                                    </div>
+                            </text>
+ )
+),
+mode: WebGridPagerModes.All,
+numericLinksCount: 5,
+firstText: "First",
+previousText: "Previous",
+nextText: "Next",
+lastText: "Last",
+htmlAttributes: new { @class = "pagination justify-content-center" }
+)
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.delete-all-btn').forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            var isDeleteAll = button.classList.contains('delete-all-btn');
+            var confirmMessage = isDeleteAll ? "Are you sure you want to delete all entries?" : "Are you sure you want to delete this?";
+            var confirmDelete = confirm(confirmMessage);
+            if (!confirmDelete) {
+                event.preventDefault();
+            }
+        });
+    });
+</script>

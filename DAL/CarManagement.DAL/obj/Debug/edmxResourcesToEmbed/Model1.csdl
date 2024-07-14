@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CarManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AvailablePremiumCar">
+    <Key>
+      <PropertyRef Name="PremiumCarID" />
+    </Key>
+    <Property Name="PremiumCarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PremiumCars" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarsData">
+    <Key>
+      <PropertyRef Name="CarID" />
+    </Key>
+    <Property Name="CarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CarMileage" Type="Double" Nullable="false" />
+    <Property Name="CarOwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CarOwnerEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PremiumCarsData">
+    <Key>
+      <PropertyRef Name="CarOwnerID" />
+    </Key>
+    <Property Name="CarOwnerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarOwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CarOwnerEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SelectedCar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PremiumCarsRepository">
+    <Key>
+      <PropertyRef Name="PremiumCars" />
+    </Key>
+    <Property Name="PremiumCars" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="CarManagementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AvailablePremiumCars" EntityType="Self.AvailablePremiumCar" />
+    <EntitySet Name="CarsDatas" EntityType="Self.CarsData" />
+    <EntitySet Name="PremiumCarsDatas" EntityType="Self.PremiumCarsData" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="PremiumCarsRepositories" EntityType="Self.PremiumCarsRepository" />
+    <FunctionImport Name="RefreshAvailablePremiumCars" />
+    <FunctionImport Name="sp_TruncateCarEntries" />
+    <FunctionImport Name="sp_updateCar">
+      <Parameter Name="CarID" Mode="In" Type="Int32" />
+      <Parameter Name="CarName" Mode="In" Type="String" />
+      <Parameter Name="CarMileage" Mode="In" Type="Decimal" />
+      <Parameter Name="CarOwnerName" Mode="In" Type="String" />
+      <Parameter Name="CarOwnerEmail" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

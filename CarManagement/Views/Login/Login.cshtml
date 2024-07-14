@@ -1,0 +1,129 @@
+﻿@model ViewModels.UserViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('../../content/images/gif_animation-car.gif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #login-box {
+            background-color: #b6e2ff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 400px;
+            transition: 0.3s;
+        }
+
+            #login-box:hover {
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .btn-info {
+            border-radius: 5px;
+            background-color: #007bff;
+            border: none;
+            width: 100%;
+        }
+
+            .btn-info:hover {
+                background-color: #0056b3;
+            }
+
+        .login-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+            .login-heading h2 {
+                margin-top: 10px;
+                font-weight: bold;
+                color: #007bff;
+            }
+    </style>
+</head>
+<body>
+    <div id="login-box">
+        <div class="login-heading">
+            <h2>Login</h2>
+        </div>
+        <div class="form-group">
+            <input id="userName" class="form-control" placeholder="User Name" required>
+        </div>
+        <div class="form-group">
+            <input id="password" type="password" class="form-control" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+            <label for="remember-me">
+                <input id="remember-me" name="remember-me" type="checkbox"> Remember me
+            </label>
+        </div>
+        <div class="form-group">
+            <button id="submit-btn" class="btn btn-info btn-md">Submit</button>
+        </div>
+        <div style="color:red;" id="message">@ViewBag.message</div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#submit-btn').click(function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                var userName = $('#userName').val();
+                var password = $('#password').val();
+                var rememberMe = $('#remember-me').is(':checked');
+
+                var requestData = {
+                    UserName: userName,
+                    Password: password,
+                    RememberMe: rememberMe
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Login/Verify',
+                    data: requestData,
+                    success: function (response) {
+                        $('#message').text(response.message);
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Login Successful',
+                                text: response.message
+                            }).then(function () {
+                                window.location.href = '/Car/Index';
+                            });
+                        }
+                    },
+                    error: function () {
+                        $('#message').text('An error occurred while processing your request.');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

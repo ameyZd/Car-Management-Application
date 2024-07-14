@@ -1,0 +1,72 @@
+﻿@model ViewModels.CarsDataViewModel
+@{
+    ViewBag.Title = "Create";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<h2 class="text-center">Create page</h2>
+
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card" style="background-color: #f9f9f9; padding: 20px; border-radius: 10px;">
+                    <div class="card-body">
+                        <h4 class="card-title"><i class="fa fa-car"></i> Cars</h4>
+                        <hr />
+                        @Html.ValidationSummary(true)
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label text-md-right"><i class="fa fa-car"></i> Car Name</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.CarName, new { htmlAttributes = new { @class = "form-control", style = "margin-bottom: 10px;" } })
+                                @Html.ValidationMessageFor(model => model.CarName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label text-md-right"><i class="fa fa-tachometer"></i> Car Mileage</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.CarMileage, new { htmlAttributes = new { @class = "form-control", style = "margin-bottom: 10px;" } })
+                                @Html.ValidationMessageFor(model => model.CarMileage, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label text-md-right"><i class="fa fa-user"></i> Owner Name</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.CarOwnerName, new { htmlAttributes = new { @class = "form-control", style = "margin-bottom: 10px;" } })
+                                @Html.ValidationMessageFor(model => model.CarOwnerName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label text-md-right"><i class="fa fa-envelope"></i> Owner Email</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.CarOwnerEmail, new { htmlAttributes = new { @class = "form-control", style = "margin-bottom: 10px;" } })
+                                @Html.ValidationMessageFor(model => model.CarOwnerEmail, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-10 offset-md-2">
+                                <button type="submit" class="btn btn-success">
+                                    Create <i class='fa fa-plus' aria-hidden='true'></i>
+                                </button>
+                                <a href="@Url.Action("Index", "Car")" class="btn btn-secondary">
+                                    <i class="fa fa-backward" aria-hidden="true"></i> Back to list
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,35 @@
+﻿body {
+    background: linear-gradient(to right, #83a4d4, #b6fbff);
+}
+
+.navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark {
+    background: linear-gradient(to right, #3494e6, #ec6ead);
+}
+
+.navbar img {
+    max-width: 80px;
+    animation-direction: normal;
+}
+
+.image {
+    width: 80px;
+    height: 66px;
+}
+
+.marquee {
+    animation: marquee 5s linear infinite;
+}
+
+.marquee-container {
+    height: 20%;
+}
+
+@@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}

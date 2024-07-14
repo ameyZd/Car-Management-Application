@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CarManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AvailablePremiumCars">
+    <Key>
+      <PropertyRef Name="PremiumCarID" />
+    </Key>
+    <Property Name="PremiumCarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PremiumCars" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarsData">
+    <Key>
+      <PropertyRef Name="CarID" />
+    </Key>
+    <Property Name="CarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CarName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CarMileage" Type="float" Nullable="false" />
+    <Property Name="CarOwnerName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CarOwnerEmail" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PremiumCarsData">
+    <Key>
+      <PropertyRef Name="CarOwnerID" />
+    </Key>
+    <Property Name="CarOwnerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CarOwnerName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CarOwnerEmail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SelectedCar" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'CarManagement.dbo.PremiumCarsRepository' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="PremiumCarsRepository">
+    <Key>
+      <PropertyRef Name="PremiumCars" />
+    </Key>
+    <Property Name="PremiumCars" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Function Name="RefreshAvailablePremiumCars" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_TruncateCarEntries" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_updateCar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CarID" Type="int" Mode="In" />
+    <Parameter Name="CarName" Type="varchar" Mode="In" />
+    <Parameter Name="CarMileage" Type="decimal" Mode="In" />
+    <Parameter Name="CarOwnerName" Type="varchar" Mode="In" />
+    <Parameter Name="CarOwnerEmail" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="CarManagementModelStoreContainer">
+    <EntitySet Name="AvailablePremiumCars" EntityType="Self.AvailablePremiumCars" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarsData" EntityType="Self.CarsData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PremiumCarsData" EntityType="Self.PremiumCarsData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PremiumCarsRepository" EntityType="Self.PremiumCarsRepository" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [PremiumCarsRepository].[PremiumCars] AS [PremiumCars]
+    FROM [dbo].[PremiumCarsRepository] AS [PremiumCarsRepository]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,35 @@
+﻿@model ViewModels.AvailablePremiumCarsDataViewModel
+
+@{
+    ViewBag.Title = "Done";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="container mt-5">
+    <div class="card mx-auto" style="max-width: 500px; background-color: #f8f9fa; border-radius: 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);">
+        <div class="card-body text-center">
+            <h2 class="mb-4">Hey, <span class="text-primary">@Html.DisplayFor(model => model.CarOwnerName)</span>,</h2>
+            <h4 class="mb-4">Your <span class="text-success">@Html.DisplayFor(model => model.SelectedCar)</span> is on its way!!</h4>
+            <h5 class="mb-4">Check your email for confirmation.</h5>
+
+            <hr />
+
+            <h4 class="mb-3">Booking details:</h4>
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => model.CarOwnerName)</dt>
+                <dd>@Html.DisplayFor(model => model.CarOwnerName)</dd>
+
+                <dt>@Html.DisplayNameFor(model => model.CarOwnerEmail)</dt>
+                <dd>@Html.DisplayFor(model => model.CarOwnerEmail)</dd>
+
+                <dt>@Html.DisplayNameFor(model => model.SelectedCar)</dt>
+                <dd>@Html.DisplayFor(model => model.SelectedCar)</dd>
+            </dl>
+
+            <hr />
+
+            <a href="@Url.Action("Index", "Car")" class="btn btn-secondary"><i class="fa fa-backward"></i> Back to list</a>
+        </div>
+    </div>
+</div>

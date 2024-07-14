@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Mass Index Calculator</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <br>
+    <div class="heading-wrapper">
+        <h1>Assignment 1 (BMI Calculator)</h1>
+    </div>
+
+    <div class="wrapper-assignment-1">
+        <p><b>Height in CM: </b></p>
+        <input type="text" id="height" class="form-control"><br><span id="height_error"></span> <br />
+        <p><b>Weight in KG: </b></p>
+        <input type="text" id="weight" class="form-control"><br><span id="weight_error"></span>
+        <br>
+        <button id="btn_calculate" class="btn btn-secondary">Calculate</button>
+        <p id="output"><b>Result: </b></p>
+    </div>
+    <hr>
+
+    <div class="heading-wrapper">
+        <h1>Assignment 2 (jQuery)</h1>
+    </div>
+
+    <div class="wrapper-assignment-2">
+        <div id="container">
+            <div id="square"></div>
+        </div>
+        <div class="button-container">
+            <button id="leftBtn" class="btn btn-primary">Left</button>
+            <button id="bottomBtn" class="btn btn-primary">Bottom</button>
+            <button id="rightBtn" class="btn btn-primary">Right</button>
+            <button id="topBtn" class="btn btn-primary">Top</button>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="heading-wrapper">
+        <h1>Assignment 3 (Currency Calculator)</h1>
+    </div>
+
+
+    <div class="wrapper-assignment-3">
+        <p><b>Enter Currency in Dollars($): </b></p>
+        <input type="text" id="dollars" class="form-control"><br><span id="dollar_error"></span> <br />
+
+        <button id="currency_calculate" class="btn btn-secondary">Calculate</button>
+
+        <p id="currency_output"><b>Result: </b></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

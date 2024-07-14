@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CarManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AvailablePremiumCars">
+          <Key>
+            <PropertyRef Name="PremiumCarID" />
+          </Key>
+          <Property Name="PremiumCarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PremiumCars" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CarsData">
+          <Key>
+            <PropertyRef Name="CarID" />
+          </Key>
+          <Property Name="CarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CarMileage" Type="float" Nullable="false" />
+          <Property Name="CarOwnerName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CarOwnerEmail" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PremiumCarsData">
+          <Key>
+            <PropertyRef Name="CarOwnerID" />
+          </Key>
+          <Property Name="CarOwnerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarOwnerName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CarOwnerEmail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SelectedCar" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CarManagement.dbo.PremiumCarsRepository' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PremiumCarsRepository">
+          <Key>
+            <PropertyRef Name="PremiumCars" />
+          </Key>
+          <Property Name="PremiumCars" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Function Name="RefreshAvailablePremiumCars" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_TruncateCarEntries" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_updateCar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CarID" Type="int" Mode="In" />
+          <Parameter Name="CarName" Type="varchar" Mode="In" />
+          <Parameter Name="CarMileage" Type="decimal" Mode="In" />
+          <Parameter Name="CarOwnerName" Type="varchar" Mode="In" />
+          <Parameter Name="CarOwnerEmail" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="CarManagementModelStoreContainer">
+          <EntitySet Name="AvailablePremiumCars" EntityType="Self.AvailablePremiumCars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarsData" EntityType="Self.CarsData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PremiumCarsData" EntityType="Self.PremiumCarsData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PremiumCarsRepository" EntityType="Self.PremiumCarsRepository" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PremiumCarsRepository].[PremiumCars] AS [PremiumCars]
+    FROM [dbo].[PremiumCarsRepository] AS [PremiumCarsRepository]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CarManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AvailablePremiumCar">
+          <Key>
+            <PropertyRef Name="PremiumCarID" />
+          </Key>
+          <Property Name="PremiumCarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PremiumCars" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CarsData">
+          <Key>
+            <PropertyRef Name="CarID" />
+          </Key>
+          <Property Name="CarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CarMileage" Type="Double" Nullable="false" />
+          <Property Name="CarOwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CarOwnerEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PremiumCarsData">
+          <Key>
+            <PropertyRef Name="CarOwnerID" />
+          </Key>
+          <Property Name="CarOwnerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarOwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CarOwnerEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SelectedCar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PremiumCarsRepository">
+          <Key>
+            <PropertyRef Name="PremiumCars" />
+          </Key>
+          <Property Name="PremiumCars" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="CarManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AvailablePremiumCars" EntityType="Self.AvailablePremiumCar" />
+          <EntitySet Name="CarsDatas" EntityType="Self.CarsData" />
+          <EntitySet Name="PremiumCarsDatas" EntityType="Self.PremiumCarsData" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="PremiumCarsRepositories" EntityType="Self.PremiumCarsRepository" />
+          <FunctionImport Name="RefreshAvailablePremiumCars" />
+          <FunctionImport Name="sp_TruncateCarEntries" />
+          <FunctionImport Name="sp_updateCar">
+            <Parameter Name="CarID" Mode="In" Type="Int32" />
+            <Parameter Name="CarName" Mode="In" Type="String" />
+            <Parameter Name="CarMileage" Mode="In" Type="Decimal" />
+            <Parameter Name="CarOwnerName" Mode="In" Type="String" />
+            <Parameter Name="CarOwnerEmail" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CarManagementModelStoreContainer" CdmEntityContainer="CarManagementEntities">
+          <EntitySetMapping Name="AvailablePremiumCars">
+            <EntityTypeMapping TypeName="CarManagementModel.AvailablePremiumCar">
+              <MappingFragment StoreEntitySet="AvailablePremiumCars">
+                <ScalarProperty Name="PremiumCarID" ColumnName="PremiumCarID" />
+                <ScalarProperty Name="PremiumCars" ColumnName="PremiumCars" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarsDatas">
+            <EntityTypeMapping TypeName="CarManagementModel.CarsData">
+              <MappingFragment StoreEntitySet="CarsData">
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
+                <ScalarProperty Name="CarName" ColumnName="CarName" />
+                <ScalarProperty Name="CarMileage" ColumnName="CarMileage" />
+                <ScalarProperty Name="CarOwnerName" ColumnName="CarOwnerName" />
+                <ScalarProperty Name="CarOwnerEmail" ColumnName="CarOwnerEmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PremiumCarsDatas">
+            <EntityTypeMapping TypeName="CarManagementModel.PremiumCarsData">
+              <MappingFragment StoreEntitySet="PremiumCarsData">
+                <ScalarProperty Name="CarOwnerID" ColumnName="CarOwnerID" />
+                <ScalarProperty Name="CarOwnerName" ColumnName="CarOwnerName" />
+                <ScalarProperty Name="CarOwnerEmail" ColumnName="CarOwnerEmail" />
+                <ScalarProperty Name="SelectedCar" ColumnName="SelectedCar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CarManagementModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PremiumCarsRepositories">
+            <EntityTypeMapping TypeName="CarManagementModel.PremiumCarsRepository">
+              <MappingFragment StoreEntitySet="PremiumCarsRepository">
+                <ScalarProperty Name="PremiumCars" ColumnName="PremiumCars" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="RefreshAvailablePremiumCars" FunctionName="CarManagementModel.Store.RefreshAvailablePremiumCars" />
+          <FunctionImportMapping FunctionImportName="sp_TruncateCarEntries" FunctionName="CarManagementModel.Store.sp_TruncateCarEntries" />
+          <FunctionImportMapping FunctionImportName="sp_updateCar" FunctionName="CarManagementModel.Store.sp_updateCar" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

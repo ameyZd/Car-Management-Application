@@ -1,0 +1,44 @@
+﻿@model ViewModels.CarsDataViewModel
+@{
+    ViewBag.Title = "MaximumMileage";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Maximum Mileage</title>
+</head>
+<body class="text-center">
+    <div class="container mt-5">
+        <div class="card mx-auto" style="max-width: 400px;">
+            <div class="card-header">
+                <h1>Maximum Mileage</h1>
+            </div>
+            <div class="card-body">
+                <p class="card-text">The maximum mileage value is: <strong>@Model.CarMileage</strong></p>
+
+                <h3>Car and Owner Details</h3>
+                <dl class="mx-auto">
+                    <dt><i class="fa fa-car"></i> @Html.DisplayNameFor(model => model.CarName)</dt>
+                    <dd>@Html.DisplayFor(model => model.CarName)</dd>
+
+                    <dt><i class="fa fa-user"></i> @Html.DisplayNameFor(model => model.CarOwnerName)</dt>
+                    <dd>@Html.DisplayFor(model => model.CarOwnerName)</dd>
+
+                    <dt><i class="fa fa-envelope"></i> @Html.DisplayNameFor(model => model.CarOwnerEmail)</dt>
+                    <dd>@Html.DisplayFor(model => model.CarOwnerEmail)</dd>
+                </dl>
+
+                <a href="@Url.Action("Index", new { carId = Model.CarID })" class="btn btn-primary mt-3">
+                    <i class="fa fa-backward"></i> Back to list
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

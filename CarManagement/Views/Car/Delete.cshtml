@@ -1,0 +1,54 @@
+﻿@model ViewModels.CarsDataViewModel
+@{
+    ViewBag.Title = "Delete";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<h2 class="text-center">Delete</h2>
+
+<h3 class="text-center">Are you sure you want to delete this?</h3>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title text-center"><i class="fa fa-trash"></i> Cars</h4>
+                    <hr />
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><strong><i class="fa fa-id-badge"></i> Car ID:</strong> @Html.DisplayFor(model => model.CarID)</li>
+                        <li class="mb-2"><strong><i class="fa fa-car"></i> Car Name:</strong> @Html.DisplayFor(model => model.CarName)</li>
+                        <li class="mb-2"><strong><i class="fa fa-tachometer"></i> Car Mileage:</strong> @Html.DisplayFor(model => model.CarMileage)</li>
+                        <li class="mb-2"><strong><i class="fa fa-user"></i> Owner Name:</strong> @Html.DisplayFor(model => model.CarOwnerName)</li>
+                        <li class="mb-2"><strong><i class="fa fa-envelope"></i> Owner Email:</strong> @Html.DisplayFor(model => model.CarOwnerEmail)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3 text-center">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button type="button" class="btn btn-danger" id="deleteButton"><i class="fa fa-trash"></i> Delete</button>
+            <a href="@Url.Action("Index", new { carId = Model.CarID })" class="btn btn-secondary ml-2">
+                <i class="fa fa-backward" aria-hidden="true"></i> Back to list
+            </a>
+        </div>
+    }
+</div>
+
+<script>
+    document.getElementById('deleteButton').addEventListener('click', function() {
+        var confirmDelete = confirm("Are you sure you want to delete?");
+        if (confirmDelete) {
+            // If user confirms deletion, submit the form
+            document.querySelector('form').submit();
+            alert("Deleted successfully!"); // Show alert after deletion
+        }
+    });
+</script>
