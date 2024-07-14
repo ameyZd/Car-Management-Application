@@ -5,6 +5,7 @@ namespace CarManagement.DAL.Services.Home
 {
     public class UserAuthenticationService
     {
+        // local db
         private static CarManagementEntities db = null;
 
         static UserAuthenticationService()
